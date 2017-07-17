@@ -1,5 +1,7 @@
 package it.gabrieletondi.telldontaskkata.domain;
 
+import it.gabrieletondi.telldontaskkata.useCase.ShippedOrdersCannotBeChangedException;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -73,5 +75,17 @@ public class Order {
 
     public void ship () {
         setStatus(OrderStatus.SHIPPED);
+    }
+
+    public boolean isShipped () {
+        return status.equals(OrderStatus.SHIPPED);
+    }
+
+    public boolean isRejected () {
+        return status.equals(OrderStatus.REJECTED);
+    }
+
+    public boolean isApproved () {
+        return status.equals(OrderStatus.APPROVED);
     }
 }
