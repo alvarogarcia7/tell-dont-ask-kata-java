@@ -1,5 +1,6 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
+@Deprecated
 public class OrderApprovalRequest {
     private int orderId;
     private boolean approved;
