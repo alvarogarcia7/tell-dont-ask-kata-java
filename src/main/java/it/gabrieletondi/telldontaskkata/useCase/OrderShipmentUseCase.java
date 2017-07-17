@@ -15,11 +15,12 @@ public class OrderShipmentUseCase {
 
     public void run(OrderShipmentRequest request) {
         final Order order = orderRepository.getById(request.getOrderId());
-        order.validateShip();
-        process(order);
+        run(order);
     }
 
-    private void process (final Order order) {
+
+    public void run (final Order order) {
+        order.validateShip();
         shipmentService.ship(order);
         order.ship();
         orderRepository.save(order);
