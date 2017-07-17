@@ -61,6 +61,16 @@ public class OrderCreationUseCaseTest {
         assertThat(insertedOrder.getItems(), is(values()));
     }
 
+    @Test(expected = UnknownProductException.class)
+    public void unknownProduct() throws Exception {
+        SellItemsRequest request = new SellItemsRequest();
+        request.setRequests(new ArrayList<>());
+        SellItemRequest unknownProductRequest = new SellItemRequest("unknown product", 0);
+        request.getRequests().add(unknownProductRequest);
+
+        useCase.run(request);
+    }
+
     private List<OrderItem> values () {
         final OrderItem element1=new OrderItem();
         Product product1 = new Product();
@@ -81,15 +91,5 @@ public class OrderCreationUseCaseTest {
         element2.setTax(new BigDecimal("1.41"));
         element2.setProduct(product2);
         return Arrays.asList(element1, element2);
-    }
-
-    @Test(expected = UnknownProductException.class)
-    public void unknownProduct() throws Exception {
-        SellItemsRequest request = new SellItemsRequest();
-        request.setRequests(new ArrayList<>());
-        SellItemRequest unknownProductRequest = new SellItemRequest("unknown product", 0);
-        request.getRequests().add(unknownProductRequest);
-
-        useCase.run(request);
     }
 }
