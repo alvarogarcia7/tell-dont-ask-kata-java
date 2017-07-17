@@ -6,6 +6,7 @@ import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isIn;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
@@ -25,7 +26,8 @@ public class OrderApprovalUseCaseTest {
 
         useCase.run(request);
 
-        final Order savedOrder = orderRepository.getSavedOrder();
+        int id = initialOrder.getId();
+        final Order savedOrder = orderRepository.getById(id);
         assertThat(savedOrder.getStatus(), is(OrderStatus.APPROVED));
     }
 
@@ -41,7 +43,8 @@ public class OrderApprovalUseCaseTest {
 
         useCase.run(initialOrder, request.isApproved());
 
-        final Order savedOrder = orderRepository.getSavedOrder();
+        int id = initialOrder.getId();
+        final Order savedOrder = orderRepository.getById(id);
         assertThat(savedOrder.getStatus(), is(OrderStatus.REJECTED));
     }
 
@@ -58,7 +61,8 @@ public class OrderApprovalUseCaseTest {
 
         useCase.run(request);
 
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
+        int id = initialOrder.getId();
+        assertThat(orderRepository.getById(id), is(nullValue()));
     }
 
     @Test(expected = ApprovedOrderCannotBeRejectedException.class)
@@ -74,7 +78,8 @@ public class OrderApprovalUseCaseTest {
 
         useCase.run(request);
 
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
+        int id = initialOrder.getId();
+        assertThat(orderRepository.getById(id), is(nullValue()));
     }
 
     @Test(expected = ShippedOrdersCannotBeChangedException.class)
@@ -90,7 +95,8 @@ public class OrderApprovalUseCaseTest {
 
         useCase.run(request);
 
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
+        int id = initialOrder.getId();
+        assertThat(orderRepository.getById(id), is(nullValue()));
     }
 
     @Test(expected = ShippedOrdersCannotBeChangedException.class)
@@ -106,6 +112,7 @@ public class OrderApprovalUseCaseTest {
 
         useCase.run(request);
 
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
+        int id = initialOrder.getId();
+        assertThat(orderRepository.getById(id), is(nullValue()));
     }
 }

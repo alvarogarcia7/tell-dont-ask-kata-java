@@ -27,7 +27,8 @@ public class OrderShipmentUseCaseTest {
 
         useCase.run(request);
 
-        assertThat(orderRepository.getSavedOrder().getStatus(), is(OrderStatus.SHIPPED));
+        int id = initialOrder.getId();
+        assertThat(orderRepository.getById(id).getStatus(), is(OrderStatus.SHIPPED));
         assertThat(shipmentService.getShippedOrder(), is(initialOrder));
     }
 
@@ -42,7 +43,8 @@ public class OrderShipmentUseCaseTest {
 
         useCase.run(request);
 
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
+        int id = initialOrder.getId();
+        assertThat(orderRepository.getById(id), is(nullValue()));
         assertThat(shipmentService.getShippedOrder(), is(nullValue()));
     }
 
@@ -58,7 +60,8 @@ public class OrderShipmentUseCaseTest {
 
         useCase.run(request);
 
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
+        int id = initialOrder.getId();
+        assertThat(orderRepository.getById(id), is(nullValue()));
         assertThat(shipmentService.getShippedOrder(), is(nullValue()));
     }
 
@@ -74,7 +77,8 @@ public class OrderShipmentUseCaseTest {
 
         useCase.run(request);
 
-        assertThat(orderRepository.getSavedOrder(), is(nullValue()));
+        int id = initialOrder.getId();
+        assertThat(orderRepository.getById(id), is(nullValue()));
         assertThat(shipmentService.getShippedOrder(), is(nullValue()));
     }
 }
