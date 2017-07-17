@@ -11,6 +11,10 @@ public class Order {
     private OrderStatus status;
     private int id;
 
+    public Order () {
+        this.status = OrderStatus.CREATED;
+    }
+
     public BigDecimal getTotal() {
         return total;
     }
