@@ -39,7 +39,7 @@ public class OrderApprovalUseCaseTest {
         request.setOrderId(1);
         request.setApproved(false);
 
-        useCase.run(request);
+        useCase.run(initialOrder, request);
 
         final Order savedOrder = orderRepository.getSavedOrder();
         assertThat(savedOrder.getStatus(), is(OrderStatus.REJECTED));

@@ -1,7 +1,6 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
 import it.gabrieletondi.telldontaskkata.domain.Order;
-import it.gabrieletondi.telldontaskkata.domain.OrderStatus;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
 
 public class OrderApprovalUseCase {
@@ -11,9 +10,13 @@ public class OrderApprovalUseCase {
         this.orderRepository = orderRepository;
     }
 
+    @Deprecated
     public void run (OrderApprovalRequest request) {
         final Order order = orderRepository.getById(request.getOrderId());
+        run(order, request);
+    }
 
+    public void run (final Order order, final OrderApprovalRequest request) {
         if (order.isShipped()) {
             throw new ShippedOrdersCannotBeChangedException();
         }
@@ -29,5 +32,4 @@ public class OrderApprovalUseCase {
         request.process(order);
         orderRepository.save(order);
     }
-
 }
