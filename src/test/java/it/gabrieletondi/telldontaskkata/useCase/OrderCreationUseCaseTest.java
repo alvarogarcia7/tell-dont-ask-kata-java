@@ -62,6 +62,10 @@ public class OrderCreationUseCaseTest {
         assertThat(insertedOrder.getTotal(), is(new BigDecimal("23.20")));
         assertThat(insertedOrder.getTax(), is(new BigDecimal("2.13")));
         assertThat(insertedOrder.getCurrency(), is("EUR"));
+        assertThat(insertedOrder.getItems(), is(values()));
+    }
+
+    private List<OrderItem> values () {
         final OrderItem element1=new OrderItem();
         Product product1 = new Product();
         product1.setName("salad");
@@ -80,8 +84,7 @@ public class OrderCreationUseCaseTest {
         element2.setTaxedAmount(new BigDecimal("15.36"));
         element2.setTax(new BigDecimal("1.41"));
         element2.setProduct(product2);
-        List<OrderItem> value = Arrays.asList(element1, element2);
-        assertThat(insertedOrder.getItems(), is(value));
+        return Arrays.asList(element1, element2);
     }
 
     @Test(expected = UnknownProductException.class)
