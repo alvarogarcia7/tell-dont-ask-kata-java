@@ -62,4 +62,16 @@ public class Order {
     public void setId(int id) {
         this.id = id;
     }
+
+    public void reject () {
+        setStatus(OrderStatus.REJECTED);
+    }
+
+    public void approve () {
+        setStatus(OrderStatus.APPROVED);
+    }
+
+    public void ship () {
+        setStatus(OrderStatus.SHIPPED);
+    }
 }
