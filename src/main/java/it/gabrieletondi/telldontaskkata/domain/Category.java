@@ -1,7 +1,12 @@
 package it.gabrieletondi.telldontaskkata.domain;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.math.BigDecimal;
 
+@EqualsAndHashCode
+@ToString
 public class Category {
     private final String name;
     private BigDecimal taxPercentage;

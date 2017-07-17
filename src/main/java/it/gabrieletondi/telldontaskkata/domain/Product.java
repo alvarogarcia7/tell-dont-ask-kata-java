@@ -1,7 +1,12 @@
 package it.gabrieletondi.telldontaskkata.domain;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.math.BigDecimal;
 
+@EqualsAndHashCode
+@ToString
 public class Product {
     private String name;
     private BigDecimal price;

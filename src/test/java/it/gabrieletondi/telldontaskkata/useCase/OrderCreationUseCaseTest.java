@@ -2,6 +2,7 @@ package it.gabrieletondi.telldontaskkata.useCase;
 
 import it.gabrieletondi.telldontaskkata.domain.Category;
 import it.gabrieletondi.telldontaskkata.domain.Order;
+import it.gabrieletondi.telldontaskkata.domain.OrderItem;
 import it.gabrieletondi.telldontaskkata.domain.OrderStatus;
 import it.gabrieletondi.telldontaskkata.domain.Product;
 import it.gabrieletondi.telldontaskkata.doubles.InMemoryProductCatalog;
@@ -12,6 +13,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -23,20 +25,19 @@ public class OrderCreationUseCaseTest {
         setTaxPercentage(new BigDecimal("10"));
         assertThat(getName(), is("food"));
     }};;
-    private final ProductCatalog productCatalog = new InMemoryProductCatalog(
-            Arrays.asList(
-                    new Product() {{
-                        setName("salad");
-                        setPrice(new BigDecimal("3.56"));
-                        setCategory(food);
-                    }},
-                    new Product() {{
-                        setName("tomato");
-                        setPrice(new BigDecimal("4.65"));
-                        setCategory(food);
-                    }}
-            )
-    );
+    List<Product> productList = Arrays.asList(
+            new Product() {{
+                setName("salad");
+                setPrice(new BigDecimal("3.56"));
+                setCategory(food);
+            }},
+            new Product() {{
+                setName("tomato");
+                setPrice(new BigDecimal("4.65"));
+                setCategory(food);
+            }});
+
+    private final ProductCatalog productCatalog = new InMemoryProductCatalog(productList);
     private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository, productCatalog);
 
     @Test
@@ -67,11 +68,31 @@ public class OrderCreationUseCaseTest {
         assertThat(insertedOrder.getItems().get(0).getQuantity(), is(2));
         assertThat(insertedOrder.getItems().get(0).getTaxedAmount(), is(new BigDecimal("7.84")));
         assertThat(insertedOrder.getItems().get(0).getTax(), is(new BigDecimal("0.72")));
+
         assertThat(insertedOrder.getItems().get(1).getProduct().getName(), is("tomato"));
         assertThat(insertedOrder.getItems().get(1).getProduct().getPrice(), is(new BigDecimal("4.65")));
         assertThat(insertedOrder.getItems().get(1).getQuantity(), is(3));
         assertThat(insertedOrder.getItems().get(1).getTaxedAmount(), is(new BigDecimal("15.36")));
         assertThat(insertedOrder.getItems().get(1).getTax(), is(new BigDecimal("1.41")));
+        final OrderItem element1=new OrderItem();
+        Product product1 = new Product();
+        product1.setName("salad");
+        product1.setPrice(new BigDecimal("3.56"));
+        product1.setCategory(food);
+        element1.setQuantity(2);
+        element1.setTax(new BigDecimal("0.72"));
+        element1.setTaxedAmount(new BigDecimal("7.84"));
+        element1.setProduct(product1);
+        final OrderItem element2 = new OrderItem();
+        Product product2 = new Product();
+        product2.setName("tomato");
+        product2.setPrice(new BigDecimal("4.65"));
+        product2.setCategory(food);
+        element2.setQuantity(3);
+        element2.setTaxedAmount(new BigDecimal("15.36"));
+        element2.setTax(new BigDecimal("1.41"));
+        element2.setProduct(product2);
+        assertThat(insertedOrder.getItems(), is(Arrays.asList(element1, element2)));
     }
 
     @Test(expected = UnknownProductException.class)
