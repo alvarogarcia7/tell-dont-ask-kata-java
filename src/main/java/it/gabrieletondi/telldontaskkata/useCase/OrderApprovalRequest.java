@@ -22,12 +22,4 @@ public class OrderApprovalRequest {
     public boolean isApproved() {
         return approved;
     }
-
-    void process (final Order order) {
-        if (isApproved()){
-            order.approve();
-        } else {
-            order.reject();
-        }
-    }
 }

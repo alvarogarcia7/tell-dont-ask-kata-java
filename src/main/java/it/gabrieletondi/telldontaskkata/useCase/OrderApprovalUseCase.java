@@ -13,23 +13,27 @@ public class OrderApprovalUseCase {
     @Deprecated
     public void run (OrderApprovalRequest request) {
         final Order order = orderRepository.getById(request.getOrderId());
-        run(order, request);
+        run(order, request.isApproved());
     }
 
-    public void run (final Order order, final OrderApprovalRequest request) {
+    public void run (final Order order, final boolean isApproved) {
         if (order.isShipped()) {
             throw new ShippedOrdersCannotBeChangedException();
         }
 
-        if (request.isApproved() && order.isRejected()) {
+        if (isApproved && order.isRejected()) {
             throw new RejectedOrderCannotBeApprovedException();
         }
 
-        if (!request.isApproved() && order.isApproved()) {
+        if (!isApproved && order.isApproved()) {
             throw new ApprovedOrderCannotBeRejectedException();
         }
 
-        request.process(order);
+        if (isApproved) {
+            order.approve();
+        } else {
+            order.reject();
+        }
         orderRepository.save(order);
     }
 }
