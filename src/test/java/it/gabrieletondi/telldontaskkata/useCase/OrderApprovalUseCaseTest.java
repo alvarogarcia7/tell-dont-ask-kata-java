@@ -3,6 +3,9 @@ package it.gabrieletondi.telldontaskkata.useCase;
 import it.gabrieletondi.telldontaskkata.domain.Order;
 import it.gabrieletondi.telldontaskkata.domain.OrderStatus;
 import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository;
+import it.gabrieletondi.telldontaskkata.exception.ApprovedOrderCannotBeRejectedException;
+import it.gabrieletondi.telldontaskkata.exception.RejectedOrderCannotBeApprovedException;
+import it.gabrieletondi.telldontaskkata.exception.ShippedOrdersCannotBeChangedException;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
