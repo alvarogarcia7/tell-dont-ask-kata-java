@@ -17,31 +17,12 @@ public class OrderApprovalUseCase {
     }
 
     public void run (final Order order, final boolean isApproved) {
-        if (order.isShipped()) {
-            throw new ShippedOrdersCannotBeChangedException();
-        }
-
         if (isApproved) {
-            approve(order);
+            order.approve();
         } else {
-            reject(order);
+            order.reject();
         }
+
         orderRepository.save(order);
-    }
-
-    private void reject(Order order){
-        if (order.isApproved()) {
-            throw new ApprovedOrderCannotBeRejectedException();
-        }
-
-        order.reject();
-    }
-
-    private void approve(Order order){
-        if (order.isRejected()) {
-            throw new RejectedOrderCannotBeApprovedException();
-        }
-
-        order.approve();
     }
 }
