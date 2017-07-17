@@ -13,6 +13,10 @@ public class OrderShipmentUseCase {
         this.shipmentService = shipmentService;
     }
 
+    @Deprecated
+    /**
+     * Prefer using run(Order)
+     */
     public void run(OrderShipmentRequest request) {
         final Order order = orderRepository.getById(request.getOrderId());
         run(order);
