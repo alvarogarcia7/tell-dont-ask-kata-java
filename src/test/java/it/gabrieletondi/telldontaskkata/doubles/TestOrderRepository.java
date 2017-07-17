@@ -11,10 +11,12 @@ public class TestOrderRepository implements OrderRepository {
     private List<Order> orders = new ArrayList<>();
 
     public Order getSavedOrder() {
-        return insertedOrder;
+        int id = insertedOrder.getId();
+        return getById(id);
     }
 
     public void save(Order order) {
+        this.addOrder(order);
         this.insertedOrder = order;
     }
 
