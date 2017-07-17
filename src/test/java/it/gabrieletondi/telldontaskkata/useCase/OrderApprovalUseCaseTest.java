@@ -9,7 +9,6 @@ import it.gabrieletondi.telldontaskkata.exception.ShippedOrdersCannotBeChangedEx
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.isIn;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
