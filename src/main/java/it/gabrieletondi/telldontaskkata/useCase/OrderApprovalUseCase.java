@@ -21,19 +21,27 @@ public class OrderApprovalUseCase {
             throw new ShippedOrdersCannotBeChangedException();
         }
 
-        if (isApproved && order.isRejected()) {
-            throw new RejectedOrderCannotBeApprovedException();
+        if (isApproved) {
+            approve(order);
+        } else {
+            reject(order);
         }
+        orderRepository.save(order);
+    }
 
-        if (!isApproved && order.isApproved()) {
+    private void reject(Order order){
+        if (order.isApproved()) {
             throw new ApprovedOrderCannotBeRejectedException();
         }
 
-        if (isApproved) {
-            order.approve();
-        } else {
-            order.reject();
+        order.reject();
+    }
+
+    private void approve(Order order){
+        if (order.isRejected()) {
+            throw new RejectedOrderCannotBeApprovedException();
         }
-        orderRepository.save(order);
+
+        order.approve();
     }
 }
