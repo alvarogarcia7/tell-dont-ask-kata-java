@@ -24,7 +24,7 @@ public class OrderShipmentUseCaseTest {
         initialOrder.approve();
         orderRepository.addOrder(initialOrder);
 
-        OrderShipmentRequest request = new OrderShipmentRequest();
+        OrderShipmentUseCase.OrderShipmentRequest request = new OrderShipmentUseCase.OrderShipmentRequest();
         request.setOrderId(1);
 
         useCase.run(request);
@@ -40,7 +40,7 @@ public class OrderShipmentUseCaseTest {
         initialOrder.setId(1);
         orderRepository.addOrder(initialOrder);
 
-        OrderShipmentRequest request = new OrderShipmentRequest();
+        OrderShipmentUseCase.OrderShipmentRequest request = new OrderShipmentUseCase.OrderShipmentRequest();
         request.setOrderId(1);
 
         useCase.run(request);
@@ -57,7 +57,7 @@ public class OrderShipmentUseCaseTest {
         initialOrder.reject();
         orderRepository.addOrder(initialOrder);
 
-        OrderShipmentRequest request = new OrderShipmentRequest();
+        OrderShipmentUseCase.OrderShipmentRequest request = new OrderShipmentUseCase.OrderShipmentRequest();
         request.setOrderId(1);
 
         useCase.run(request);
@@ -74,7 +74,7 @@ public class OrderShipmentUseCaseTest {
         initialOrder.ship();
         orderRepository.addOrder(initialOrder);
 
-        OrderShipmentRequest request = new OrderShipmentRequest();
+        OrderShipmentUseCase.OrderShipmentRequest request = new OrderShipmentUseCase.OrderShipmentRequest();
         request.setOrderId(1);
 
         useCase.run(request);

@@ -26,4 +26,15 @@ public class OrderShipmentUseCase {
         orderRepository.save(order);
     }
 
+    public static class OrderShipmentRequest {
+        private int orderId;
+
+        public void setOrderId(int orderId) {
+            this.orderId = orderId;
+        }
+
+        public int getOrderId() {
+            return orderId;
+        }
+    }
 }
