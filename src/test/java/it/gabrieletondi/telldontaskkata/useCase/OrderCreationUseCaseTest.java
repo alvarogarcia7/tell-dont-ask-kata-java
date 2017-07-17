@@ -24,7 +24,7 @@ public class OrderCreationUseCaseTest {
         assertThat(getName(), is("food"));
     }};;
     private final ProductCatalog productCatalog = new InMemoryProductCatalog(
-            Arrays.<Product>asList(
+            Arrays.asList(
                     new Product() {{
                         setName("salad");
                         setPrice(new BigDecimal("3.56"));
