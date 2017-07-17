@@ -3,15 +3,15 @@ package it.gabrieletondi.telldontaskkata.domain;
 import java.math.BigDecimal;
 
 public class Category {
-    private String name;
+    private final String name;
     private BigDecimal taxPercentage;
+
+    public Category (final String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public BigDecimal getTaxPercentage() {
