@@ -30,6 +30,7 @@ public class OrderShipmentUseCase {
         orderRepository.save(order);
     }
 
+    @Deprecated
     public static class OrderShipmentRequest {
         private int orderId;
 
