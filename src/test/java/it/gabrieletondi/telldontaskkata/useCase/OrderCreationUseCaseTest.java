@@ -9,6 +9,7 @@ import it.gabrieletondi.telldontaskkata.doubles.InMemoryProductCatalog;
 import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository;
 import it.gabrieletondi.telldontaskkata.exception.UnknownProductException;
 import it.gabrieletondi.telldontaskkata.repository.ProductCatalog;
+import it.gabrieletondi.telldontaskkata.useCase.SellItemRequest.SellItemsRequest;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -37,7 +38,7 @@ public class OrderCreationUseCaseTest {
     public void sellMultipleItems() throws Exception {
         SellItemRequest saladRequest = new SellItemRequest("salad", 2);
         SellItemRequest tomatoRequest = new SellItemRequest("tomato", 3);
-        final SellItemRequest.SellItemsRequest request = SellItemRequest.SellItemsRequest.of(saladRequest, tomatoRequest);
+        final SellItemsRequest request = SellItemsRequest.of(saladRequest, tomatoRequest);
 
         useCase.run(request);
 
@@ -52,7 +53,7 @@ public class OrderCreationUseCaseTest {
     @Test(expected = UnknownProductException.class)
     public void unknownProduct() throws Exception {
         SellItemRequest unknownProductRequest = new SellItemRequest("unknown product", 0);
-        SellItemRequest.SellItemsRequest request = SellItemRequest.SellItemsRequest.of(unknownProductRequest);
+        SellItemsRequest request = SellItemsRequest.of(unknownProductRequest);
 
         useCase.run(request);
     }
