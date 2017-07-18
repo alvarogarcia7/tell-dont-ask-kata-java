@@ -13,8 +13,6 @@ import static java.math.RoundingMode.HALF_UP;
 public class OrderItem {
     private Product product;
     private int quantity;
-    private BigDecimal taxedAmount;
-    private BigDecimal tax;
 
     public OrderItem (final Product product, final int quantity) {
         this.product = product;
