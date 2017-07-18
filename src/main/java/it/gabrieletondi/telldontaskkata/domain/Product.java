@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 @ToString
 public class Product {
-    private String name;
-    private BigDecimal price;
-    private Category category;
+    private final String name;
+    private final BigDecimal price;
+    private final Category category;
 
     private Product (final String name, final BigDecimal price, final Category category) {
         this.name = name;
