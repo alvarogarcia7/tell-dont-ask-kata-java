@@ -47,7 +47,4 @@ public class OrderItem {
         return product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);
     }
 
-    public void setTax(BigDecimal tax) {
-        this.tax = tax;
-    }
 }
