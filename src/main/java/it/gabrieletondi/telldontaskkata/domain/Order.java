@@ -131,7 +131,11 @@ public class Order {
         orderItem.setTaxedAmount(taxedAmount);
         getItems().add(orderItem);
 
-        this.total = getTotal().add(taxedAmount);
+        BigDecimal total = BigDecimal.ZERO;
+        for (OrderItem item: items){
+            total = total.add(item.getTaxedAmount());
+        }
+        this.total = total;
         this.tax = getTax().add(taxAmount);
     }
 }
