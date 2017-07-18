@@ -9,28 +9,44 @@ import static java.math.BigDecimal.valueOf;
 import static java.math.RoundingMode.HALF_UP;
 
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(exclude = "vatScheme")
 public class OrderItem {
+    private final VAT vatScheme;
     private Product product;
     private int quantity;
 
     public OrderItem (final Product product, final int quantity) {
         this.product = product;
         this.quantity = quantity;
+        vatScheme = new VAT();
     }
 
     public BigDecimal getTaxedAmount() {
-        final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax()).setScale(2, HALF_UP);
+        final BigDecimal unitaryTaxedAmount = product.getPrice().add(vatScheme.unitaryTax(product)).setScale(2, HALF_UP);
         return unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
     }
 
     public BigDecimal getTax() {
-        final BigDecimal unitaryTax = unitaryTax();
+        final BigDecimal unitaryTax = vatScheme.unitaryTax(product);
         return unitaryTax.multiply(valueOf(quantity));
     }
 
-    private BigDecimal unitaryTax () {
-        return product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);
+
+
+    private static class VAT{
+        public BigDecimal getTaxedAmount(Product product, int quantity) {
+            final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax(product)).setScale(2, HALF_UP);
+            return unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
+        }
+
+        public BigDecimal getTax(Product product, int quantity) {
+            final BigDecimal unitaryTax = unitaryTax(product);
+            return unitaryTax.multiply(valueOf(quantity));
+        }
+
+        private BigDecimal unitaryTax (Product product) {
+            return product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);
+        }
     }
 
 }
