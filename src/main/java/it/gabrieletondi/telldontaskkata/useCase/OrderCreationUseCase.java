@@ -35,8 +35,7 @@ public class OrderCreationUseCase {
 
             if (product == null) {
                 throw new UnknownProductException();
-            }
-            else {
+            } else {
                 calculateTaxForOrderItem(order, itemRequest, product);
             }
         }
