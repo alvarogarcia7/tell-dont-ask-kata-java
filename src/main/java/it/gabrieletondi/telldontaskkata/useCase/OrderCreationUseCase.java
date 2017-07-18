@@ -10,11 +10,9 @@ import static java.math.BigDecimal.valueOf;
 
 public class OrderCreationUseCase {
     private final OrderRepository orderRepository;
-    private final ProductCatalog productCatalog;
 
-    public OrderCreationUseCase(OrderRepository orderRepository, ProductCatalog productCatalog) {
+    public OrderCreationUseCase(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
-        this.productCatalog = productCatalog;
     }
 
     public void run(SellItemRequest.SellItemsRequest request) {

@@ -5,15 +5,12 @@ import it.gabrieletondi.telldontaskkata.domain.Order;
 import it.gabrieletondi.telldontaskkata.domain.OrderItem;
 import it.gabrieletondi.telldontaskkata.domain.OrderStatus;
 import it.gabrieletondi.telldontaskkata.domain.Product;
-import it.gabrieletondi.telldontaskkata.doubles.InMemoryProductCatalog;
 import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository;
 import it.gabrieletondi.telldontaskkata.exception.UnknownProductException;
-import it.gabrieletondi.telldontaskkata.repository.ProductCatalog;
 import it.gabrieletondi.telldontaskkata.useCase.SellItemRequest.SellItemsRequest;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,8 +28,7 @@ public class OrderCreationUseCaseTest {
     Product tomato = Product.aNew("tomato", new BigDecimal("4.65"), food);
     List<Product> productList = Arrays.asList(salad, tomato);
 
-    private final ProductCatalog productCatalog = new InMemoryProductCatalog(productList);
-    private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository, productCatalog);
+    private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository);
 
     @Test
     public void sellMultipleItems() throws Exception {
