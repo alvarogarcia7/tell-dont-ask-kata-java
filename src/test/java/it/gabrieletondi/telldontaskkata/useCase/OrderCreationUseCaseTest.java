@@ -26,7 +26,6 @@ public class OrderCreationUseCaseTest {
     }};
     Product salad = Product.aNew("salad", new BigDecimal("3.56"), food);
     Product tomato = Product.aNew("tomato", new BigDecimal("4.65"), food);
-    List<Product> productList = Arrays.asList(salad, tomato);
 
     private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository);
 
