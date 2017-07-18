@@ -17,18 +17,14 @@ import static java.math.BigDecimal.valueOf;
 import static java.math.RoundingMode.HALF_UP;
 
 public class Order {
-    private BigDecimal total;
     private String currency;
     private List<OrderItem> items;
-    private BigDecimal tax;
     private OrderStatus status;
     private int id;
 
     public Order () {
         this.status = OrderStatus.CREATED;
         this.currency = "EUR";
-        this.total = new BigDecimal("0.00");
-        this.tax = new BigDecimal("0.00");
         this.items = new ArrayList<>();
     }
 
