@@ -17,8 +17,8 @@ import static java.math.BigDecimal.valueOf;
 import static java.math.RoundingMode.HALF_UP;
 
 public class Order {
-    private String currency;
-    private List<OrderItem> items;
+    private final String currency;
+    private final List<OrderItem> items;
     private OrderStatus status;
     private int id;
 
