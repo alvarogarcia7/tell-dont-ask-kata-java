@@ -20,9 +20,7 @@ import static org.junit.Assert.assertThat;
 
 public class OrderCreationUseCaseTest {
     private final TestOrderRepository orderRepository = new TestOrderRepository();
-    private Category food = new Category("food", new BigDecimal("10")) {{
-        assertThat(getName(), is("food"));
-    }};
+    private Category food = new Category("food", new BigDecimal("10"));
     Product salad = Product.aNew("salad", new BigDecimal("3.56"), food);
     Product tomato = Product.aNew("tomato", new BigDecimal("4.65"), food);
 

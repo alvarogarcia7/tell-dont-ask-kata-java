@@ -15,11 +15,7 @@ public class Category {
         this.name = name;
         this.taxPercentage = taxPercentage;
     }
-
-    public String getName() {
-        return name;
-    }
-
+    
     public BigDecimal getTaxPercentage() {
         return taxPercentage;
     }
