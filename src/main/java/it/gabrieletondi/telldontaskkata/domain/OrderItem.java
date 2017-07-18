@@ -5,6 +5,9 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 
+import static java.math.BigDecimal.valueOf;
+import static java.math.RoundingMode.HALF_UP;
+
 @ToString
 @EqualsAndHashCode
 public class OrderItem {
@@ -16,6 +19,12 @@ public class OrderItem {
     public OrderItem (final Product product, final int quantity) {
         this.product = product;
         this.quantity = quantity;
+        final BigDecimal unitaryTax = product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);
+        final BigDecimal taxAmount = unitaryTax.multiply(valueOf(quantity));
+        this.setTax(taxAmount);
+        final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax).setScale(2, HALF_UP);
+        final BigDecimal taxedAmount = unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
+        this.setTaxedAmount(taxedAmount);
     }
 
     public Product getProduct() {
