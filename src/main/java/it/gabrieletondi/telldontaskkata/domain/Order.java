@@ -36,7 +36,7 @@ public class Order {
         return total;
     }
 
-    public void setTotal(BigDecimal total) {
+    private void setTotal (BigDecimal total) {
         this.total = total;
     }
 
@@ -44,7 +44,7 @@ public class Order {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    private void setCurrency (String currency) {
         this.currency = currency;
     }
 
@@ -52,7 +52,7 @@ public class Order {
         return items;
     }
 
-    public void setItems(List<OrderItem> items) {
+    private void setItems (List<OrderItem> items) {
         this.items = items;
     }
 
@@ -60,7 +60,7 @@ public class Order {
         return tax;
     }
 
-    public void setTax(BigDecimal tax) {
+    private void setTax (BigDecimal tax) {
         this.tax = tax;
     }
 
@@ -68,7 +68,7 @@ public class Order {
         return status;
     }
 
-    public void setStatus(OrderStatus status) {
+    private void setStatus (OrderStatus status) {
         this.status = status;
     }
 
