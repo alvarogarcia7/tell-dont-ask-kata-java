@@ -13,6 +13,8 @@ import java.util.List;
 import static it.gabrieletondi.telldontaskkata.domain.OrderStatus.CREATED;
 import static it.gabrieletondi.telldontaskkata.domain.OrderStatus.REJECTED;
 import static it.gabrieletondi.telldontaskkata.domain.OrderStatus.SHIPPED;
+import static java.math.BigDecimal.valueOf;
+import static java.math.RoundingMode.HALF_UP;
 
 public class Order {
     private BigDecimal total;
@@ -135,5 +137,22 @@ public class Order {
         if (getStatus().equals(SHIPPED)) {
             throw new OrderCannotBeShippedTwiceException();
         }
+    }
+
+    public void add (final Product product, final int quantity) {
+        final BigDecimal unitaryTax = product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);
+        final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax).setScale(2, HALF_UP);
+        final BigDecimal taxedAmount = unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
+        final BigDecimal taxAmount = unitaryTax.multiply(valueOf(quantity));
+
+        final OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(product);
+        orderItem.setQuantity(quantity);
+        orderItem.setTax(taxAmount);
+        orderItem.setTaxedAmount(taxedAmount);
+        getItems().add(orderItem);
+
+        setTotal(getTotal().add(taxedAmount));
+        setTax(getTax().add(taxAmount));
     }
 }

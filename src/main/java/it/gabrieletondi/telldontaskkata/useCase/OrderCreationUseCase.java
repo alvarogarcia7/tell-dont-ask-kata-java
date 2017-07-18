@@ -39,19 +39,6 @@ public class OrderCreationUseCase {
     }
 
     private void calculateTaxForOrderItem (final Order order, final Product product, final int quantity) {
-        final BigDecimal unitaryTax = product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);
-        final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax).setScale(2, HALF_UP);
-        final BigDecimal taxedAmount = unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
-        final BigDecimal taxAmount = unitaryTax.multiply(valueOf(quantity));
-
-        final OrderItem orderItem = new OrderItem();
-        orderItem.setProduct(product);
-        orderItem.setQuantity(quantity);
-        orderItem.setTax(taxAmount);
-        orderItem.setTaxedAmount(taxedAmount);
-        order.getItems().add(orderItem);
-
-        order.setTotal(order.getTotal().add(taxedAmount));
-        order.setTax(order.getTax().add(taxAmount));
+        order.add(product, quantity);
     }
 }
