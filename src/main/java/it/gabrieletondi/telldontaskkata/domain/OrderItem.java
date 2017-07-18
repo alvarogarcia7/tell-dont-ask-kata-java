@@ -11,7 +11,7 @@ import static java.math.RoundingMode.HALF_UP;
 @ToString
 @EqualsAndHashCode(exclude = "vatScheme")
 public class OrderItem {
-    private final VAT vatScheme;
+    private final VATScheme vatScheme;
     private Product product;
     private int quantity;
 
@@ -22,24 +22,24 @@ public class OrderItem {
     }
 
     public BigDecimal getTaxedAmount() {
-        final BigDecimal unitaryTaxedAmount = product.getPrice().add(vatScheme.unitaryTax(product)).setScale(2, HALF_UP);
-        return unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
+        return vatScheme.getTaxedAmount(product, quantity);
     }
 
     public BigDecimal getTax() {
-        final BigDecimal unitaryTax = vatScheme.unitaryTax(product);
-        return unitaryTax.multiply(valueOf(quantity));
+        return vatScheme.getTax(product, quantity);
     }
 
 
 
-    private static class VAT{
-        public BigDecimal getTaxedAmount(Product product, int quantity) {
+    private static class VAT implements VATScheme {
+        @Override
+        public BigDecimal getTaxedAmount (Product product, int quantity) {
             final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax(product)).setScale(2, HALF_UP);
             return unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
         }
 
-        public BigDecimal getTax(Product product, int quantity) {
+        @Override
+        public BigDecimal getTax (Product product, int quantity) {
             final BigDecimal unitaryTax = unitaryTax(product);
             return unitaryTax.multiply(valueOf(quantity));
         }
