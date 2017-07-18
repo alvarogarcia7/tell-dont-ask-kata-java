@@ -1,5 +1,7 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class SellItemRequest {
@@ -20,14 +22,19 @@ public class SellItemRequest {
     }
 
     public static class SellItemsRequest {
-        private List<SellItemRequest> requests;
 
-        public void setRequests(List<SellItemRequest> requests) {
-            this.requests = requests;
+        private final List<SellItemRequest> values;
+
+        private SellItemsRequest (final List<SellItemRequest> sellItemRequests) {
+            this.values = sellItemRequests;
         }
 
-        public List<SellItemRequest> getRequests() {
-            return requests;
+        public static SellItemsRequest of(SellItemRequest... requests) {
+            return new SellItemsRequest(Arrays.asList(requests));
+        }
+
+        public List<SellItemRequest> getRequests () {
+            return values;
         }
     }
 }
