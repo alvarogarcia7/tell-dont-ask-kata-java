@@ -18,6 +18,10 @@ public class Product {
         this.category = category;
     }
 
+    public static Product aNew (final String name, final BigDecimal price, final Category category) {
+        return new Product(name, price, category);
+    }
+
     public String getName() {
         return name;
     }
@@ -28,9 +32,5 @@ public class Product {
 
     public Category getCategory() {
         return category;
-    }
-
-    public static Product aNew (final String name, final BigDecimal price, final Category category) {
-        return new Product(name, price, category);
     }
 }
