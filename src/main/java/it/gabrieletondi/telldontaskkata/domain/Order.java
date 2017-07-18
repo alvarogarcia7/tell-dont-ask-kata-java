@@ -26,50 +26,30 @@ public class Order {
 
     public Order () {
         this.status = OrderStatus.CREATED;
-        this.setCurrency("EUR");
-        this.setTotal(new BigDecimal("0.00"));
-        this.setTax(new BigDecimal("0.00"));
-        this.setItems(new ArrayList<>());
+        this.currency = "EUR";
+        this.total = new BigDecimal("0.00");
+        this.tax = new BigDecimal("0.00");
+        this.items = new ArrayList<>();
     }
 
     public BigDecimal getTotal() {
         return total;
     }
 
-    private void setTotal (BigDecimal total) {
-        this.total = total;
-    }
-
     public String getCurrency() {
         return currency;
-    }
-
-    private void setCurrency (String currency) {
-        this.currency = currency;
     }
 
     public List<OrderItem> getItems() {
         return items;
     }
 
-    private void setItems (List<OrderItem> items) {
-        this.items = items;
-    }
-
     public BigDecimal getTax() {
         return tax;
     }
 
-    private void setTax (BigDecimal tax) {
-        this.tax = tax;
-    }
-
     public OrderStatus getStatus() {
         return status;
-    }
-
-    private void setStatus (OrderStatus status) {
-        this.status = status;
     }
 
     public int getId() {
@@ -114,7 +94,7 @@ public class Order {
     }
 
     public void ship () {
-        setStatus(OrderStatus.SHIPPED);
+        this.status = OrderStatus.SHIPPED;
     }
 
     public boolean isShipped () {
@@ -152,7 +132,7 @@ public class Order {
         orderItem.setTaxedAmount(taxedAmount);
         getItems().add(orderItem);
 
-        setTotal(getTotal().add(taxedAmount));
-        setTax(getTax().add(taxAmount));
+        this.total = getTotal().add(taxedAmount);
+        this.tax = getTax().add(taxAmount);
     }
 }
