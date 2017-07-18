@@ -98,11 +98,11 @@ public class Order {
     }
 
     public void validateShip () {
-        if (getStatus().equals(CREATED) || getStatus().equals(REJECTED)) {
+        if (isCreated() || isRejected()) {
             throw new OrderCannotBeShippedException();
         }
 
-        if (getStatus().equals(SHIPPED)) {
+        if (isShipped()) {
             throw new OrderCannotBeShippedTwiceException();
         }
     }
