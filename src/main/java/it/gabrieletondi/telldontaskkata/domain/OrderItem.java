@@ -32,8 +32,12 @@ public class OrderItem {
     private static class VAT implements VATScheme {
         @Override
         public BigDecimal getTaxedAmount (Product product, int quantity) {
-            final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax(product)).setScale(2, HALF_UP);
+            final BigDecimal unitaryTaxedAmount = unitaryTaxedAmount(product);
             return unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
+        }
+
+        private BigDecimal unitaryTaxedAmount (final Product product) {
+            return product.getPrice().add(unitaryTax(product)).setScale(2, HALF_UP);
         }
 
         @Override
