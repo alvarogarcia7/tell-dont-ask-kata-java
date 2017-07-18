@@ -7,6 +7,7 @@ import it.gabrieletondi.telldontaskkata.exception.RejectedOrderCannotBeApprovedE
 import it.gabrieletondi.telldontaskkata.exception.ShippedOrdersCannotBeChangedException;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static it.gabrieletondi.telldontaskkata.domain.OrderStatus.CREATED;
@@ -23,6 +24,10 @@ public class Order {
 
     public Order () {
         this.status = OrderStatus.CREATED;
+        this.setCurrency("EUR");
+        this.setTotal(new BigDecimal("0.00"));
+        this.setTax(new BigDecimal("0.00"));
+        this.setItems(new ArrayList<>());
     }
 
     public BigDecimal getTotal() {

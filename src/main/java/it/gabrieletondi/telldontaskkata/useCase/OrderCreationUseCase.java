@@ -25,10 +25,7 @@ public class OrderCreationUseCase {
 
     public void run(SellItemRequest.SellItemsRequest request) {
         Order order = new Order();
-        order.setItems(new ArrayList<>());
-        order.setCurrency("EUR");
-        order.setTotal(new BigDecimal("0.00"));
-        order.setTax(new BigDecimal("0.00"));
+
 
         for (SellItemRequest itemRequest : request.getRequests()) {
             Product product = productCatalog.getByName(itemRequest.getProductName());
