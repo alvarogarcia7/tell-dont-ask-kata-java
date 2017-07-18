@@ -12,7 +12,7 @@ public class Product {
     private BigDecimal price;
     private Category category;
 
-    public Product (final String name, final BigDecimal price, final Category category) {
+    private Product (final String name, final BigDecimal price, final Category category) {
         this.name = name;
         this.price = price;
         this.category = category;
