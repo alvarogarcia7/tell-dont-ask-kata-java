@@ -34,10 +34,6 @@ public class OrderItem {
         return unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
     }
 
-    public void setTaxedAmount(BigDecimal taxedAmount) {
-        this.taxedAmount = taxedAmount;
-    }
-
     public BigDecimal getTax() {
         final BigDecimal unitaryTax = unitaryTax();
         return unitaryTax.multiply(valueOf(quantity));

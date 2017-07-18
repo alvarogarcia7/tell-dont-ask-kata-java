@@ -77,7 +77,6 @@ public class OrderCreationUseCaseTest {
         product1.setPrice(new BigDecimal("3.56"));
         product1.setCategory(food);
         final OrderItem element1=new OrderItem(product1, 2);
-        element1.setTaxedAmount(new BigDecimal("7.84"));
         element1.setProduct(product1);
         Product product2 = new Product();
         product2.setName("tomato");
@@ -85,7 +84,6 @@ public class OrderCreationUseCaseTest {
         product2.setCategory(food);
         final OrderItem element2 = new OrderItem(product2, 3);
         element2.setQuantity(3);
-        element2.setTaxedAmount(new BigDecimal("15.36"));
         element2.setProduct(product2);
         return Arrays.asList(element1, element2);
     }
