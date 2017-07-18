@@ -9,10 +9,11 @@ import java.math.BigDecimal;
 @ToString
 public class Category {
     private final String name;
-    private BigDecimal taxPercentage;
+    private final BigDecimal taxPercentage;
 
-    public Category (final String name) {
+    public Category (final String name, final BigDecimal taxPercentage) {
         this.name = name;
+        this.taxPercentage = taxPercentage;
     }
 
     public String getName() {
@@ -21,9 +22,5 @@ public class Category {
 
     public BigDecimal getTaxPercentage() {
         return taxPercentage;
-    }
-
-    public void setTaxPercentage(BigDecimal taxPercentage) {
-        this.taxPercentage = taxPercentage;
     }
 }
