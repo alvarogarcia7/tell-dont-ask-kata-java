@@ -32,20 +32,12 @@ public class Order {
         this.items = new ArrayList<>();
     }
 
-    public BigDecimal getTotal() {
-        return total;
-    }
-
     public String getCurrency() {
         return currency;
     }
 
     public List<OrderItem> getItems() {
         return items;
-    }
-
-    public BigDecimal getTax() {
-        return tax;
     }
 
     public OrderStatus getStatus() {
@@ -130,17 +122,21 @@ public class Order {
         final BigDecimal taxedAmount = unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
         orderItem.setTaxedAmount(taxedAmount);
         getItems().add(orderItem);
+    }
 
-        BigDecimal total = BigDecimal.ZERO;
-        for (OrderItem item: items){
-            total = total.add(item.getTaxedAmount());
-        }
-        this.total = total;
-
+    public BigDecimal getTax () {
         BigDecimal taxTotal = BigDecimal.ZERO;
         for (OrderItem item: items){
             taxTotal = taxTotal.add(item.getTax());
         }
-        this.tax = taxTotal;
+        return taxTotal;
+    }
+
+    public BigDecimal getTotal () {
+        BigDecimal total = BigDecimal.ZERO;
+        for (OrderItem item: items){
+            total = total.add(item.getTaxedAmount());
+        }
+        return total;
     }
 }
