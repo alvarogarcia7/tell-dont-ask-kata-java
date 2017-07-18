@@ -72,20 +72,19 @@ public class OrderCreationUseCaseTest {
     }
 
     private List<OrderItem> values () {
-        final OrderItem element1=new OrderItem();
         Product product1 = new Product();
         product1.setName("salad");
         product1.setPrice(new BigDecimal("3.56"));
         product1.setCategory(food);
-        element1.setQuantity(2);
+        final OrderItem element1=new OrderItem(product1, 2);
         element1.setTax(new BigDecimal("0.72"));
         element1.setTaxedAmount(new BigDecimal("7.84"));
         element1.setProduct(product1);
-        final OrderItem element2 = new OrderItem();
         Product product2 = new Product();
         product2.setName("tomato");
         product2.setPrice(new BigDecimal("4.65"));
         product2.setCategory(food);
+        final OrderItem element2 = new OrderItem(product2, 3);
         element2.setQuantity(3);
         element2.setTaxedAmount(new BigDecimal("15.36"));
         element2.setTax(new BigDecimal("1.41"));

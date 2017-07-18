@@ -108,7 +108,7 @@ public class Order {
     }
 
     public void add (final Product product, final int quantity) {
-        final OrderItem orderItem = new OrderItem();
+        final OrderItem orderItem = new OrderItem(product, quantity);
         orderItem.setProduct(product);
         orderItem.setQuantity(quantity);
         final BigDecimal unitaryTax = product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);

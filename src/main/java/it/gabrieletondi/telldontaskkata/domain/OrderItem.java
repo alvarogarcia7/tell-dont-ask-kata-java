@@ -13,6 +13,11 @@ public class OrderItem {
     private BigDecimal taxedAmount;
     private BigDecimal tax;
 
+    public OrderItem (final Product product, final int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+
     public Product getProduct() {
         return product;
     }
