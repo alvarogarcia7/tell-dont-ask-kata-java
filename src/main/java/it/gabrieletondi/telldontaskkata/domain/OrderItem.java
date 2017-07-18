@@ -18,7 +18,7 @@ public class OrderItem {
     public OrderItem (final Product product, final int quantity) {
         this.product = product;
         this.quantity = quantity;
-        vatScheme = new VAT();
+        vatScheme = new FormattedVATScheme(new VAT());
     }
 
     public BigDecimal getTaxedAmount() {
@@ -29,14 +29,14 @@ public class OrderItem {
         return vatScheme.getTax(product, quantity);
     }
 
-    private static class VAT implements VATScheme {
+    static class VAT implements VATScheme {
         @Override
         public BigDecimal getTaxedAmount (Product product, int quantity) {
-            return unitaryTaxedAmount(product).multiply(valueOf(quantity)).setScale(2, HALF_UP);
+            return unitaryTaxedAmount(product).multiply(valueOf(quantity));
         }
 
         private BigDecimal unitaryTaxedAmount (final Product product) {
-            return product.getPrice().add(unitaryTax(product)).setScale(2, HALF_UP);
+            return product.getPrice().add(unitaryTax(product));
         }
 
         @Override
