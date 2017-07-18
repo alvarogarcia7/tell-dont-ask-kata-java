@@ -26,10 +26,10 @@ public class OrderCreationUseCaseTest {
     private Category food = new Category("food") {{
         setTaxPercentage(new BigDecimal("10"));
         assertThat(getName(), is("food"));
-    }};;
-    List<Product> productList = Arrays.asList(
-            Product.aNew("salad", new BigDecimal("3.56"), food),
-            Product.aNew("tomato", new BigDecimal("4.65"), food));
+    }};
+    Product salad = Product.aNew("salad", new BigDecimal("3.56"), food);
+    Product tomato = Product.aNew("tomato", new BigDecimal("4.65"), food);
+    List<Product> productList = Arrays.asList(salad, tomato);
 
     private final ProductCatalog productCatalog = new InMemoryProductCatalog(productList);
     private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository, productCatalog);
