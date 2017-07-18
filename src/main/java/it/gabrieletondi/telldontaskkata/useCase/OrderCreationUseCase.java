@@ -22,7 +22,7 @@ public class OrderCreationUseCase {
 
 
         for (SellItemRequest itemRequest : request.getRequests()) {
-            Product product = productCatalog.getByName(itemRequest.getProductName());
+            Product product = itemRequest.getProduct();
 
             if (product == null) {
                 throw new UnknownProductException();

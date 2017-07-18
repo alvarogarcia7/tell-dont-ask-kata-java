@@ -1,23 +1,25 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
+import it.gabrieletondi.telldontaskkata.domain.Product;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class SellItemRequest {
+    private final Product product;
     private int quantity;
-    private String productName;
 
-    public SellItemRequest (final String productName, final int quantity) {
+    public SellItemRequest (final Product product, final int quantity) {
+        this.product = product;
         this.quantity = quantity;
-        this.productName = productName;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public String getProductName() {
-        return productName;
+    public Product getProduct () {
+        return product;
     }
 
     public static class SellItemsRequest {
