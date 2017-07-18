@@ -22,7 +22,7 @@ public class OrderCreationUseCase {
         this.productCatalog = productCatalog;
     }
 
-    public void run(SellItemsRequest request) {
+    public void run(SellItemRequest.SellItemsRequest request) {
         Order order = new Order();
         order.setItems(new ArrayList<>());
         order.setCurrency("EUR");
