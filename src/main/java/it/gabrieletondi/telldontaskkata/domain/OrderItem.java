@@ -21,14 +21,6 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public BigDecimal getTaxedAmount() {
         final BigDecimal unitaryTaxedAmount = product.getPrice().add(unitaryTax()).setScale(2, HALF_UP);
         return unitaryTaxedAmount.multiply(valueOf(quantity)).setScale(2, HALF_UP);
