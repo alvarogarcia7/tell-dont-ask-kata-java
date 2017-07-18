@@ -12,7 +12,7 @@ import static java.math.RoundingMode.HALF_UP;
 @EqualsAndHashCode(exclude = "vatScheme")
 public class OrderItem {
     private final VATScheme vatScheme;
-    private Product product;
+    private final Product product;
     private int quantity;
 
     public OrderItem (final Product product, final int quantity) {
