@@ -22,10 +22,6 @@ public class Product {
         return new Product(name, price, category);
     }
 
-    public String getName() {
-        return name;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
