@@ -29,8 +29,6 @@ public class OrderItem {
         return vatScheme.getTax(product, quantity);
     }
 
-
-
     private static class VAT implements VATScheme {
         @Override
         public BigDecimal getTaxedAmount (Product product, int quantity) {
