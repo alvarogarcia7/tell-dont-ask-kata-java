@@ -12,6 +12,12 @@ public class Product {
     private BigDecimal price;
     private Category category;
 
+    public Product (final String name, final BigDecimal price, final Category category) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+
     public String getName() {
         return name;
     }
@@ -34,5 +40,9 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public static Product aNew (final String name, final BigDecimal price, final Category category) {
+        return new Product(name, price, category);
     }
 }

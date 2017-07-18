@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static it.gabrieletondi.telldontaskkata.domain.Product.aNew;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -26,16 +27,8 @@ public class OrderCreationUseCaseTest {
         assertThat(getName(), is("food"));
     }};;
     List<Product> productList = Arrays.asList(
-            new Product() {{
-                setName("salad");
-                setPrice(new BigDecimal("3.56"));
-                setCategory(food);
-            }},
-            new Product() {{
-                setName("tomato");
-                setPrice(new BigDecimal("4.65"));
-                setCategory(food);
-            }});
+            Product.aNew("salad", new BigDecimal("3.56"), food),
+            Product.aNew("tomato", new BigDecimal("4.65"), food));
 
     private final ProductCatalog productCatalog = new InMemoryProductCatalog(productList);
     private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository, productCatalog);
@@ -72,15 +65,9 @@ public class OrderCreationUseCaseTest {
     }
 
     private List<OrderItem> values () {
-        Product product1 = new Product();
-        product1.setName("salad");
-        product1.setPrice(new BigDecimal("3.56"));
-        product1.setCategory(food);
+        Product product1 = aNew("salad", new BigDecimal("3.56"), food);
         final OrderItem element1=new OrderItem(product1, 2);
-        Product product2 = new Product();
-        product2.setName("tomato");
-        product2.setPrice(new BigDecimal("4.65"));
-        product2.setCategory(food);
+        Product product2 = aNew("tomato", new BigDecimal("4.65"), food);
         final OrderItem element2 = new OrderItem(product2, 3);
         return Arrays.asList(element1, element2);
     }
