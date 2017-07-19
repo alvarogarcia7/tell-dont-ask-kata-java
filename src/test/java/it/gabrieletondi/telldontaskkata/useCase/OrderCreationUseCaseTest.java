@@ -31,7 +31,7 @@ public class OrderCreationUseCaseTest {
     @Test
     public void sellMultipleItems() throws Exception {
         SellItemRequest saladRequest = new SellItemRequest(new OrderItem(salad, 2));
-        SellItemRequest tomatoRequest = new SellItemRequest(tomato, 3);
+        SellItemRequest tomatoRequest = new SellItemRequest(new OrderItem(tomato, 3));
         final SellItemsRequest request = SellItemsRequest.of(saladRequest, tomatoRequest);
 
         useCase.run(request);
