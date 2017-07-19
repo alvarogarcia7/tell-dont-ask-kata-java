@@ -46,10 +46,6 @@ public class OrderItem {
         public BigDecimal getTax (Product product, int quantity) {
             return taxes.tax();
         }
-
-        private BigDecimal unitaryTax (Product product) {
-            return product.getPrice().divide(valueOf(100)).multiply(product.getCategory().getTaxPercentage()).setScale(2, HALF_UP);
-        }
     }
 
 }
