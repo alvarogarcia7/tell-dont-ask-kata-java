@@ -17,9 +17,13 @@ public class OrderCreationUseCase {
     }
 
     public void run(SellItemRequest.SellItemsRequest request) {
-        Order order = request.getRequests().stream().reduce(new Order(), add(), (order1, order2) -> order2);
+        Order order = createOrder(request);
 
         orderRepository.save(order);
+    }
+
+    private Order createOrder (final SellItemRequest.SellItemsRequest request) {
+        return request.getRequests().stream().reduce(new Order(), add(), (order1, order2) -> order2);
     }
 
     private BiFunction<Order, SellItemRequest, Order> add () {
