@@ -27,8 +27,7 @@ public class OrderCreationUseCase {
     }
 
     private BiFunction<Order, SellItemRequest, Order> add () {
-        return (order, sellItemRequest) ->
-        {
+        return (order, sellItemRequest) -> {
             order.add(sellItemRequest.getRequest());
             return order;
         };
