@@ -1,8 +1,6 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
 import it.gabrieletondi.telldontaskkata.domain.OrderItem;
-import it.gabrieletondi.telldontaskkata.domain.Product;
-import it.gabrieletondi.telldontaskkata.exception.UnknownProductException;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -12,13 +10,6 @@ public class SellItemRequest {
 
     @Getter
     private final OrderItem request;
-
-    public SellItemRequest (final Product product, final int quantity) throws UnknownProductException {
-        if(product == null){
-            throw new UnknownProductException();
-        }
-        this.request = new OrderItem(product, quantity);
-    }
 
     public SellItemRequest (final OrderItem orderItem) {
         this.request = orderItem;
