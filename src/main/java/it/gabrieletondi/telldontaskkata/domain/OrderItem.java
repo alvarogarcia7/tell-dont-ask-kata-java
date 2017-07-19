@@ -18,4 +18,7 @@ public class OrderItem {
         return product.taxes().multiple(quantity);
     }
 
+    public boolean isInvalid () {
+        return product == null;
+    }
 }

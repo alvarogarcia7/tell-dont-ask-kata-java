@@ -103,8 +103,8 @@ public class Order {
         }
     }
 
-    public void add (final Product product, final int quantity) {
-        items.add(new OrderItem(product, quantity));
+    public void add (OrderItem orderItem) {
+        items.add(orderItem);
     }
 
     public BigDecimal getTax () {

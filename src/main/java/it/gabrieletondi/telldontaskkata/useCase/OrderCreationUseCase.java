@@ -1,6 +1,7 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
 import it.gabrieletondi.telldontaskkata.domain.Order;
+import it.gabrieletondi.telldontaskkata.domain.OrderItem;
 import it.gabrieletondi.telldontaskkata.domain.Product;
 import it.gabrieletondi.telldontaskkata.exception.UnknownProductException;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
@@ -19,12 +20,12 @@ public class OrderCreationUseCase {
 
 
         for (SellItemRequest itemRequest : request.getRequests()) {
-            Product product = itemRequest.getProduct();
+            OrderItem request1 = itemRequest.getRequest();
 
-            if (product == null) {
+            if (request1.isInvalid()) {
                 throw new UnknownProductException();
             } else {
-                order.add(product, itemRequest.getQuantity());
+                order.add(request1);
             }
         }
 

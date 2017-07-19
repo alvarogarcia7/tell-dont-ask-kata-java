@@ -1,25 +1,19 @@
 package it.gabrieletondi.telldontaskkata.useCase;
 
+import it.gabrieletondi.telldontaskkata.domain.OrderItem;
 import it.gabrieletondi.telldontaskkata.domain.Product;
+import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class SellItemRequest {
-    private final Product product;
-    private int quantity;
+
+    @Getter
+    private final OrderItem request;
 
     public SellItemRequest (final Product product, final int quantity) {
-        this.product = product;
-        this.quantity = quantity;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public Product getProduct () {
-        return product;
+        request = new OrderItem(product, quantity);
     }
 
     public static class SellItemsRequest {
