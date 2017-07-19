@@ -115,7 +115,7 @@ public class Order {
     public BigDecimal getTax () {
         BigDecimal taxTotal = BigDecimal.ZERO;
         for (OrderItem item: items){
-            taxTotal = taxTotal.add(item.getTax());
+            taxTotal = taxTotal.add(item.tax().tax());
         }
         return taxTotal;
     }
@@ -123,7 +123,7 @@ public class Order {
     public BigDecimal getTotal () {
         BigDecimal total = BigDecimal.ZERO;
         for (OrderItem item: items){
-            total = total.add(item.getTaxedAmount());
+            total = total.add(item.tax().taxedAmount());
         }
         return total;
     }
