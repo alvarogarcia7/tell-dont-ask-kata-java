@@ -5,7 +5,6 @@ import it.gabrieletondi.telldontaskkata.domain.Order;
 import it.gabrieletondi.telldontaskkata.domain.OrderItem;
 import it.gabrieletondi.telldontaskkata.domain.OrderStatus;
 import it.gabrieletondi.telldontaskkata.domain.Product;
-import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository;
 import it.gabrieletondi.telldontaskkata.exception.UnknownProductException;
 import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
 import it.gabrieletondi.telldontaskkata.useCase.SellItemRequest.SellItemsRequest;
@@ -22,13 +21,12 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class OrderCreationUseCaseTest {
-    private final TestOrderRepository orderRepository = new TestOrderRepository();
     private Category food = new Category("food", new BigDecimal("10"));
     Product salad = Product.aNew("salad", new BigDecimal("3.56"), food);
     Product tomato = Product.aNew("tomato", new BigDecimal("4.65"), food);
 
-    private final OrderRepository orderRepository1 = Mockito.mock(OrderRepository.class);
-    private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository1);
+    private final OrderRepository orderRepository = Mockito.mock(OrderRepository.class);
+    private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository);
 
     @Test
     public void sellMultipleItems() throws Exception {
@@ -39,7 +37,7 @@ public class OrderCreationUseCaseTest {
         useCase.run(request);
 
         final ArgumentCaptor<Order> orderCapture = ArgumentCaptor.forClass(Order.class);
-        Mockito.verify(orderRepository1).save(orderCapture.capture());
+        Mockito.verify(orderRepository).save(orderCapture.capture());
         final Order insertedOrder = orderCapture.getValue();
 
         assertThat(insertedOrder.getStatus(), is(OrderStatus.CREATED));
