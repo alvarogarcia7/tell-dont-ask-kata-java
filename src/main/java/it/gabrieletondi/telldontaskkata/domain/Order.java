@@ -104,8 +104,7 @@ public class Order {
     }
 
     public void add (final Product product, final int quantity) {
-        final OrderItem orderItem = new OrderItem(product, quantity);
-        items.add(orderItem);
+        items.add(new OrderItem(product, quantity));
     }
 
     public BigDecimal getTax () {
