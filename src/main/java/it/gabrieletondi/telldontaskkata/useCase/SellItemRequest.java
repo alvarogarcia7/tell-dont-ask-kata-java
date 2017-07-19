@@ -17,7 +17,11 @@ public class SellItemRequest {
         if(product == null){
             throw new UnknownProductException();
         }
-        request = new OrderItem(product, quantity);
+        this.request = new OrderItem(product, quantity);
+    }
+
+    public SellItemRequest (final OrderItem orderItem) {
+        this.request = orderItem;
     }
 
     public static class SellItemsRequest {

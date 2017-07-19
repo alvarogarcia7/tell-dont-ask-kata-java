@@ -30,7 +30,7 @@ public class OrderCreationUseCaseTest {
 
     @Test
     public void sellMultipleItems() throws Exception {
-        SellItemRequest saladRequest = new SellItemRequest(salad, 2);
+        SellItemRequest saladRequest = new SellItemRequest(new OrderItem(salad, 2));
         SellItemRequest tomatoRequest = new SellItemRequest(tomato, 3);
         final SellItemsRequest request = SellItemsRequest.of(saladRequest, tomatoRequest);
 
