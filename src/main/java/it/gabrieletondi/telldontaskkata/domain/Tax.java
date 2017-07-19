@@ -14,8 +14,8 @@ public class Tax {
         this.taxes = taxes;
     }
 
-    public BigDecimal taxedAmount () {
-        return taxedAmount;
+    public Tax multiple (final int quantity) {
+        return Tax.multiple(this, quantity);
     }
 
     public static Tax byPercentage (final BigDecimal price, final BigDecimal percentage) {
@@ -23,15 +23,15 @@ public class Tax {
         return new Tax(price.add(taxes), taxes);
     }
 
-    public Tax multiple (final int quantity) {
-        return Tax.multiple(this, quantity);
-    }
-
     private static Tax multiple (final Tax tax, final int quantity) {
         BigDecimal multiplier = BigDecimal.valueOf(quantity);
         return new Tax(
                 tax.taxedAmount.multiply(multiplier),
                 tax.taxes.multiply(multiplier));
+    }
+
+    public BigDecimal taxedAmount () {
+        return taxedAmount;
     }
 
     public BigDecimal tax () {
