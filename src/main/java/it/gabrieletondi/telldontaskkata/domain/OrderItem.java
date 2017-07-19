@@ -6,7 +6,6 @@ import lombok.ToString;
 import java.math.BigDecimal;
 
 import static java.math.BigDecimal.valueOf;
-import static java.math.RoundingMode.HALF_UP;
 
 @ToString
 @EqualsAndHashCode(exclude = "vatScheme")
@@ -31,20 +30,20 @@ public class OrderItem {
 
     static class VAT implements VATScheme {
 
-        private Tax taxes;
+        private Tax tax;
 
         public VAT (final Product product, final int quantity) {
-            this.taxes = product.taxes().multiple(quantity);
+            this.tax = product.taxes().multiple(quantity);
         }
 
         @Override
         public BigDecimal getTaxedAmount (Product product, int quantity) {
-            return taxes.taxedAmount();
+            return tax.taxedAmount();
         }
 
         @Override
         public BigDecimal getTax (Product product, int quantity) {
-            return taxes.tax();
+            return tax.tax();
         }
     }
 
