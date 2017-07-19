@@ -17,9 +17,8 @@ public class OrderCreationUseCase {
     }
 
     public void run(SellItemRequest.SellItemsRequest request) {
-        BiFunction <Order, SellItemRequest, Order> f = add();
         BinaryOperator<Order> combiner = (order1, order2) -> order2;
-        Order order = request.getRequests().stream().reduce(new Order(),f, combiner);
+        Order order = request.getRequests().stream().reduce(new Order(), add(), combiner);
 
         orderRepository.save(order);
     }
