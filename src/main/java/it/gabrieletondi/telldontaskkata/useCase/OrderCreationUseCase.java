@@ -16,8 +16,7 @@ public class OrderCreationUseCase {
 
 
         for (SellItemRequest itemRequest : request.getRequests()) {
-            OrderItem request1 = itemRequest.getRequest();
-            order.add(request1);
+            order.add(itemRequest.getRequest());
         }
 
         orderRepository.save(order);
