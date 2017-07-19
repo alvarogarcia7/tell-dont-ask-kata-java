@@ -10,11 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static it.gabrieletondi.telldontaskkata.domain.OrderStatus.CREATED;
-import static it.gabrieletondi.telldontaskkata.domain.OrderStatus.REJECTED;
-import static it.gabrieletondi.telldontaskkata.domain.OrderStatus.SHIPPED;
 import static java.math.BigDecimal.valueOf;
-import static java.math.RoundingMode.HALF_UP;
 
 public class Order {
     private final String currency;
@@ -109,7 +105,7 @@ public class Order {
 
     public void add (final Product product, final int quantity) {
         final OrderItem orderItem = new OrderItem(product, quantity);
-        getItems().add(orderItem);
+        items.add(orderItem);
     }
 
     public BigDecimal getTax () {
