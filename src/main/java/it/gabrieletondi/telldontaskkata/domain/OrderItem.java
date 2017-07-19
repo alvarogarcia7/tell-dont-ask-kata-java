@@ -34,7 +34,7 @@ public class OrderItem {
         private Tax taxes;
 
         public VAT (final Product product, final int quantity) {
-            this.taxes = (product.taxes().multiple(quantity));
+            this.taxes = product.taxes().multiple(quantity);
         }
 
         @Override
