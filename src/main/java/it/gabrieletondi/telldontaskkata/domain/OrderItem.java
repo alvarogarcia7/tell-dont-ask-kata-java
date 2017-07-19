@@ -5,8 +5,6 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 
-import static java.math.BigDecimal.valueOf;
-
 @ToString
 @EqualsAndHashCode(exclude = "vatScheme")
 public class OrderItem {
