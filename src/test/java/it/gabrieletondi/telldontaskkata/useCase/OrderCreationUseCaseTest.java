@@ -48,10 +48,7 @@ public class OrderCreationUseCaseTest {
 
     @Test(expected = UnknownProductException.class)
     public void unknownProduct() throws Exception {
-        SellItemRequest unknownProductRequest = new SellItemRequest(null, 0);
-        SellItemsRequest request = SellItemsRequest.of(unknownProductRequest);
-
-        useCase.run(request);
+        new SellItemRequest(null, 0);
     }
 
     private List<OrderItem> values () {
