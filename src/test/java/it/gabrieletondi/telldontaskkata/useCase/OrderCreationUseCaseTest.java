@@ -46,11 +46,6 @@ public class OrderCreationUseCaseTest {
         assertThat(insertedOrder.getItems(), is(values()));
     }
 
-    @Test(expected = UnknownProductException.class)
-    public void unknownProduct() throws Exception {
-        new SellItemRequest(null, 0);
-    }
-
     private List<OrderItem> values () {
         Product product1 = aNew("salad", new BigDecimal("3.56"), food);
         final OrderItem element1=new OrderItem(product1, 2);
