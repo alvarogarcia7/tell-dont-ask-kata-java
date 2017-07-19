@@ -17,15 +17,19 @@ public class OrderCreationUseCase {
     }
 
     public void run(SellItemRequest.SellItemsRequest request) {
-        BiFunction <Order, SellItemRequest, Order> f = (order1, sellItemRequest) ->
-        {
-            order1.add(sellItemRequest.getRequest());
-            return order1;
-        };
+        BiFunction <Order, SellItemRequest, Order> f = add();
         BinaryOperator<Order> combiner = (order1, order2) -> order2;
         Order order = request.getRequests().stream().reduce(new Order(),f, combiner);
 
         orderRepository.save(order);
+    }
+
+    private BiFunction<Order, SellItemRequest, Order> add () {
+        return (order1, sellItemRequest) ->
+        {
+            order1.add(sellItemRequest.getRequest());
+            return order1;
+        };
     }
 
 }
