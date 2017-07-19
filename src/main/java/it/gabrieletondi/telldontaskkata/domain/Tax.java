@@ -9,7 +9,7 @@ public class Tax {
     private final BigDecimal taxedAmount;
     private final BigDecimal taxes;
 
-    public Tax (final BigDecimal taxedAmount, final BigDecimal taxes) {
+    private Tax (final BigDecimal taxedAmount, final BigDecimal taxes) {
         this.taxedAmount = taxedAmount;
         this.taxes = taxes;
     }
