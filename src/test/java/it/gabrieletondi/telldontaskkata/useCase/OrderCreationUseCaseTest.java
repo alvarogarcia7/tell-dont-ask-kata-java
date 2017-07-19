@@ -7,8 +7,11 @@ import it.gabrieletondi.telldontaskkata.domain.OrderStatus;
 import it.gabrieletondi.telldontaskkata.domain.Product;
 import it.gabrieletondi.telldontaskkata.doubles.TestOrderRepository;
 import it.gabrieletondi.telldontaskkata.exception.UnknownProductException;
+import it.gabrieletondi.telldontaskkata.repository.OrderRepository;
 import it.gabrieletondi.telldontaskkata.useCase.SellItemRequest.SellItemsRequest;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -24,7 +27,8 @@ public class OrderCreationUseCaseTest {
     Product salad = Product.aNew("salad", new BigDecimal("3.56"), food);
     Product tomato = Product.aNew("tomato", new BigDecimal("4.65"), food);
 
-    private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository);
+    private final OrderRepository orderRepository1 = Mockito.mock(OrderRepository.class);
+    private final OrderCreationUseCase useCase = new OrderCreationUseCase(orderRepository1);
 
     @Test
     public void sellMultipleItems() throws Exception {
@@ -34,7 +38,10 @@ public class OrderCreationUseCaseTest {
 
         useCase.run(request);
 
-        final Order insertedOrder = orderRepository.getSavedOrder();
+        final ArgumentCaptor<Order> orderCapture = ArgumentCaptor.forClass(Order.class);
+        Mockito.verify(orderRepository1).save(orderCapture.capture());
+        final Order insertedOrder = orderCapture.getValue();
+
         assertThat(insertedOrder.getStatus(), is(OrderStatus.CREATED));
         assertThat(insertedOrder.getTotal(), is(new BigDecimal("23.20")));
         assertThat(insertedOrder.getTax(), is(new BigDecimal("2.13")));
