@@ -13,11 +13,8 @@ public class OrderCreationUseCase {
 
     public void run(SellItemRequest.SellItemsRequest request) {
         Order order = new Order();
-
-
-        for (SellItemRequest itemRequest : request.getRequests()) {
-            order.add(itemRequest.getRequest());
-        }
+        
+        request.getRequests().stream().forEach(itemRequest -> order.add(itemRequest.getRequest()));
 
         orderRepository.save(order);
     }
