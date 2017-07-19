@@ -5,6 +5,8 @@ import lombok.ToString;
 
 import java.math.BigDecimal;
 
+import static java.math.BigDecimal.valueOf;
+
 @EqualsAndHashCode
 @ToString
 public class Product {
@@ -28,5 +30,9 @@ public class Product {
 
     public Category getCategory() {
         return category;
+    }
+
+    public Tax taxes () {
+        return Tax.byPercentage(price, category.getTaxPercentage());
     }
 }
