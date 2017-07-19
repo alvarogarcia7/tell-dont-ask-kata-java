@@ -44,7 +44,7 @@ public class OrderItem {
 
         @Override
         public BigDecimal getTax (Product product, int quantity) {
-            return unitaryTax(product).multiply(valueOf(quantity));
+            return taxes.tax();
         }
 
         private BigDecimal unitaryTax (Product product) {

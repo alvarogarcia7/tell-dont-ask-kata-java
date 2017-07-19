@@ -33,4 +33,8 @@ public class Tax {
                 tax.taxedAmount.multiply(multiplier),
                 tax.taxes.multiply(multiplier));
     }
+
+    public BigDecimal tax () {
+        return taxes;
+    }
 }
