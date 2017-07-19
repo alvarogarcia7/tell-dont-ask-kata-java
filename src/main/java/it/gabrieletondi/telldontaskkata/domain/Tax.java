@@ -22,4 +22,15 @@ public class Tax {
         final BigDecimal taxes = price.divide(valueOf(100)).multiply(percentage).setScale(2, HALF_UP);
         return new Tax(price.add(taxes), taxes);
     }
+
+    public Tax multiple (final int quantity) {
+        return Tax.multiple(this, quantity);
+    }
+
+    private static Tax multiple (final Tax tax, final int quantity) {
+        BigDecimal multiplier = BigDecimal.valueOf(quantity);
+        return new Tax(
+                tax.taxedAmount.multiply(multiplier),
+                tax.taxes.multiply(multiplier));
+    }
 }

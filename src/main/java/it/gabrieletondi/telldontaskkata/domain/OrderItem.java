@@ -18,7 +18,7 @@ public class OrderItem {
     public OrderItem (final Product product, final int quantity) {
         this.product = product;
         this.quantity = quantity;
-        vatScheme = new FormattedVATScheme(new VAT());
+        vatScheme = new FormattedVATScheme(new VAT(product, quantity));
     }
 
     public BigDecimal getTaxedAmount() {
@@ -30,9 +30,17 @@ public class OrderItem {
     }
 
     static class VAT implements VATScheme {
+
+        private Tax taxes;
+
+        public VAT (final Product product, final int quantity) {
+            this.taxes = (product.taxes().multiple(quantity));
+        }
+
         @Override
         public BigDecimal getTaxedAmount (Product product, int quantity) {
-            return product.taxes().taxedAmount().multiply(valueOf(quantity));
+            taxes = product.taxes();
+            return taxes.taxedAmount().multiply(valueOf(quantity));
         }
 
         @Override
