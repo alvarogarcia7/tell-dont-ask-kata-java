@@ -39,7 +39,6 @@ public class OrderCreationUseCaseTest {
         final ArgumentCaptor<Order> orderCapture = ArgumentCaptor.forClass(Order.class);
         Mockito.verify(orderRepository).save(orderCapture.capture());
         final Order insertedOrder = orderCapture.getValue();
-
         assertThat(insertedOrder.getStatus(), is(OrderStatus.CREATED));
         assertThat(insertedOrder.getTotal(), is(new BigDecimal("23.20")));
         assertThat(insertedOrder.getTax(), is(new BigDecimal("2.13")));
